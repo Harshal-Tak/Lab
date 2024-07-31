@@ -1,0 +1,298 @@
+
+mysql> CREATE DATABASE Company;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> USE Company;
+Database changed
+
+mysql> CREATE TABLE salesman (
+    -> s_id INT(3),
+    -> s_name VARCHAR(20),
+    -> s_address CHAR(20),
+    -> date_of_joining DATE,
+    -> salary DECIMAL(9,2),
+    -> c_id INT(4),
+    -> c_name VARCHAR(20),
+    -> product_name VARCHAR(20));
+Query OK, 0 rows affected, 2 warnings (0.04 sec)
+
+mysql> INSERT INTO salesman VALUES
+    -> (101,'Harshal Tak','Pune','2022-02-14',1000000,1001,'OpenAI','ChatGPT')
+    -> (102,'Raj Shinde','Pune','2022-02-10',700000,1002,'OpenAI','DALLE-2')
+    -> (103,'Pratik Wangaskar','Mumbai','2023-01-10',600000,1001,'OpenAI','DALLE-2')
+    -> (104,'Mahesh Shriram','Mumbai','2022-04-05',800000,1001,'OpenAI','ChatGPT')
+    -> (106,'Nishant Shinde','Mumbai','2022-04-04',700000,1001,'OpenAI','API');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(102,'Raj Shinde','Pune','2022-02-10',700000,1002,'OpenAI','DALLE-2')
+(103,'Prat' at line 3
+mysql> INSERT INTO salesman VALUES
+    -> (101,'Harshal Tak','Pune','2022-02-14',1000000,1001,'OpenAI','ChatGPT');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO salesman VALUES
+    -> (102,'Raj Shinde','Pune','2022-02-10',700000,1002,'OpenAI','DALLE-2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO salesman VALUES
+    -> (103,'Pratik Wangaskar','Mumbai','2023-01-10',600000,1001,'OpenAI','DALLE-2');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO salesman VALUES
+    -> (106,'Nishant Shinde','Mumbai','2022-04-04',700000,1001,'OpenAI','API');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> DELETE FROM salesman WHERE s_id = 106;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO salesman VALUES
+    -> (104,'Mahesh Shriram','Mumbai','2022-04-05',800000,1001,'OpenAI','ChatGPT')
+    -> (106,'Nishant Shinde','Mumbai','2022-04-04',700000,1001,'OpenAI','API');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(106,'Nishant Shinde','Mumbai','2022-04-04',700000,1001,'OpenAI','API')' at line 3
+mysql> INSERT INTO salesman VALUES
+    -> (104,'Mahesh Shriram','Mumbai','2022-04-05',800000,1001,'OpenAI','ChatGPT'),
+    -> (106,'Nishant Shinde','Mumbai','2022-04-04',700000,1001,'OpenAI','API');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE salesman MODIFY s_address VARCHAR(20);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT *FROM salesman;
++------+------------------+-----------+-----------------+------------+------+--------+--------------+
+| s_id | s_name           | s_address | date_of_joining | salary     | c_id | c_name | product_name |
++------+------------------+-----------+-----------------+------------+------+--------+--------------+
+|  101 | Harshal Tak      | Pune      | 2022-02-14      | 1000000.00 | 1001 | OpenAI | ChatGPT      |
+|  102 | Raj Shinde       | Pune      | 2022-02-10      |  700000.00 | 1002 | OpenAI | DALLE-2      |
+|  103 | Pratik Wangaskar | Mumbai    | 2023-01-10      |  600000.00 | 1001 | OpenAI | DALLE-2      |
+|  104 | Mahesh Shriram   | Mumbai    | 2022-04-05      |  800000.00 | 1001 | OpenAI | ChatGPT      |
+|  106 | Nishant Shinde   | Mumbai    | 2022-04-04      |  700000.00 | 1001 | OpenAI | API          |
++------+------------------+-----------+-----------------+------------+------+--------+--------------+
+5 rows in set (0.01 sec)
+
+mysql> DESC salesman;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| s_id            | int          | YES  |     | NULL    |       |
+| s_name          | varchar(20)  | YES  |     | NULL    |       |
+| s_address       | varchar(20)  | YES  |     | NULL    |       |
+| date_of_joining | date         | YES  |     | NULL    |       |
+| salary          | decimal(9,2) | YES  |     | NULL    |       |
+| c_id            | int          | YES  |     | NULL    |       |
+| c_name          | varchar(20)  | YES  |     | NULL    |       |
+| product_name    | varchar(20)  | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+8 rows in set (0.02 sec)
+
+mysql> DELETE FROM salesman WHERE c_id = 1002;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> UPDATE salesman SET s_address = 'Pune' WHERE s_id = 103 or s_id = 106;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> SELECT *FROM salesman;
++------+------------------+-----------+-----------------+------------+------+--------+--------------+
+| s_id | s_name           | s_address | date_of_joining | salary     | c_id | c_name | product_name |
++------+------------------+-----------+-----------------+------------+------+--------+--------------+
+|  101 | Harshal Tak      | Pune      | 2022-02-14      | 1000000.00 | 1001 | OpenAI | ChatGPT      |
+|  103 | Pratik Wangaskar | Pune      | 2023-01-10      |  600000.00 | 1001 | OpenAI | DALLE-2      |
+|  104 | Mahesh Shriram   | Mumbai    | 2022-04-05      |  800000.00 | 1001 | OpenAI | ChatGPT      |
+|  106 | Nishant Shinde   | Pune      | 2022-04-04      |  700000.00 | 1001 | OpenAI | API          |
++------+------------------+-----------+-----------------+------------+------+--------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE salesman ADD PRIMARY KEY(s_id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC salesman;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| s_id            | int          | NO   | PRI | NULL    |       |
+| s_name          | varchar(20)  | YES  |     | NULL    |       |
+| s_address       | varchar(20)  | YES  |     | NULL    |       |
+| date_of_joining | date         | YES  |     | NULL    |       |
+| salary          | decimal(9,2) | YES  |     | NULL    |       |
+| c_id            | int          | YES  |     | NULL    |       |
+| c_name          | varchar(20)  | YES  |     | NULL    |       |
+| product_name    | varchar(20)  | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> ALTER TABLE salesman
+    -> ADD CONSTRAINT Uk_name UNIQUE(s_name);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC salesman;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| s_id            | int          | NO   | PRI | NULL    |       |
+| s_name          | varchar(20)  | YES  | UNI | NULL    |       |
+| s_address       | varchar(20)  | YES  |     | NULL    |       |
+| date_of_joining | date         | YES  |     | NULL    |       |
+| salary          | decimal(9,2) | YES  |     | NULL    |       |
+| c_id            | int          | YES  |     | NULL    |       |
+| c_name          | varchar(20)  | YES  |     | NULL    |       |
+| product_name    | varchar(20)  | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> ALTER TABLE salesman ADD age INT(3);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> SELECT *FROM salesman;
++------+------------------+-----------+-----------------+------------+------+--------+--------------+------+
+| s_id | s_name           | s_address | date_of_joining | salary     | c_id | c_name | product_name | age  |
++------+------------------+-----------+-----------------+------------+------+--------+--------------+------+
+|  101 | Harshal Tak      | Pune      | 2022-02-14      | 1000000.00 | 1001 | OpenAI | ChatGPT      | NULL |
+|  103 | Pratik Wangaskar | Pune      | 2023-01-10      |  600000.00 | 1001 | OpenAI | DALLE-2      | NULL |
+|  104 | Mahesh Shriram   | Mumbai    | 2022-04-05      |  800000.00 | 1001 | OpenAI | ChatGPT      | NULL |
+|  106 | Nishant Shinde   | Pune      | 2022-04-04      |  700000.00 | 1001 | OpenAI | API          | NULL |
++------+------------------+-----------+-----------------+------------+------+--------+--------------+------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE salesman
+    -> ADD CONSTRAINT chk_age CHECK(age>=18);
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT *FROM salesman;
++------+------------------+-----------+-----------------+------------+------+--------+--------------+------+
+| s_id | s_name           | s_address | date_of_joining | salary     | c_id | c_name | product_name | age  |
++------+------------------+-----------+-----------------+------------+------+--------+--------------+------+
+|  101 | Harshal Tak      | Pune      | 2022-02-14      | 1000000.00 | 1001 | OpenAI | ChatGPT      | NULL |
+|  103 | Pratik Wangaskar | Pune      | 2023-01-10      |  600000.00 | 1001 | OpenAI | DALLE-2      | NULL |
+|  104 | Mahesh Shriram   | Mumbai    | 2022-04-05      |  800000.00 | 1001 | OpenAI | ChatGPT      | NULL |
+|  106 | Nishant Shinde   | Pune      | 2022-04-04      |  700000.00 | 1001 | OpenAI | API          | NULL |
++------+------------------+-----------+-----------------+------------+------+--------+--------------+------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE INDEX idx_name ON salesman(s_name);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE salesman
+    -> MODIFY COLUMN s_id INT NOT NULL,
+    -> MODIFY COLUMN salary DECIMAL(10, 2) NOT NULL,
+    -> MODIFY COLUMN date_of_joining DATE NOT NULL,
+    -> MODIFY COLUMN s_name VARCHAR(255) NOT NULL;
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> CREATE VIEW s_view AS
+    -> SELECT s_id,s_name,salary
+    -> FROM salesman;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT *FROM s_view;
++------+------------------+------------+
+| s_id | s_name           | salary     |
++------+------------------+------------+
+|  101 | Harshal Tak      | 1000000.00 |
+|  103 | Pratik Wangaskar |  600000.00 |
+|  104 | Mahesh Shriram   |  800000.00 |
+|  106 | Nishant Shinde   |  700000.00 |
++------+------------------+------------+
+4 rows in set (0.01 sec)
+
+mysql> DELETE FROM s_view WHERE s_id = 101;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT SUM(salary) AS total_salalry FROM salesman;
++---------------+
+| total_salalry |
++---------------+
+|    2100000.00 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(salary) AS avg_salary FROM salesman;
++---------------+
+| avg_salary    |
++---------------+
+| 700000.000000 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(salary) AS max_salary FROM salesman;
++------------+
+| max_salary |
++------------+
+|  800000.00 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(salary) AS min_salary FROM salesman;
++------------+
+| min_salary |
++------------+
+|  600000.00 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(salary) AS count_rows FROM salesman;
++------------+
+| count_rows |
++------------+
+|          3 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE test1(id INT,name VARCHAR(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE test2(id INT,name VARCHAR(10));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT *FROM test1 UNION SELECT *FROM test2;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO test1 VALUES
+    -> (1,'Raj'),
+    -> (2,'Ramu'),
+    -> (3,'Ramesh'),
+    -> (4,'Rajesh');
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO test2 VALUES
+    -> (1,'Raj'),
+    ->
+    -> (2,'Ramu'),
+    -> (5,'Rajnikant');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT *FROM test1 UNION SELECT *FROM test2;
++------+-----------+
+| id   | name      |
++------+-----------+
+|    1 | Raj       |
+|    2 | Ramu      |
+|    3 | Ramesh    |
+|    4 | Rajesh    |
+|    5 | Rajnikant |
++------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM salesman;
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> DROP TABLE salesman;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+

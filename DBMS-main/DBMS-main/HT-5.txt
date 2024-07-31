@@ -1,0 +1,115 @@
+db.employee.insertOne({name:"Harshal",age:20,salary:700000})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6537df62c2c68106a108b810")
+}
+
+db.employee.insertMany([{name:"Raj",age:20,salary:500000},{name:"Pratik",age:19,salary:500000},{name:"Mahesh",age:20,salary:700000}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6537dfd8c2c68106a108b811"),
+    '1': ObjectId("6537dfd8c2c68106a108b812"),
+    '2': ObjectId("6537dfd8c2c68106a108b813")
+  }
+}
+
+db.employee.find({name:"Harshal"})
+{
+  _id: ObjectId("6537df62c2c68106a108b810"),
+  name: 'Harshal',
+  age: 20,
+  salary: 700000
+}
+db.employee.find({age:20})
+{
+  _id: ObjectId("6537df62c2c68106a108b810"),
+  name: 'Harshal',
+  age: 20,
+  salary: 700000
+}
+{
+  _id: ObjectId("6537dfd8c2c68106a108b811"),
+  name: 'Raj',
+  age: 20,
+  salary: 500000
+}
+{
+  _id: ObjectId("6537dfd8c2c68106a108b813"),
+  name: 'Mahesh',
+  age: 20,
+  salary: 700000
+}
+
+db.employee.updateOne({name:'Mahesh'},{$set:{salary:600000}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+db.employee.aggregate([{$sort: {age: -1}}])
+{
+  _id: ObjectId("6537df62c2c68106a108b810"),
+  name: 'Harshal',
+  age: 20,
+  salary: 700000
+}
+{
+  _id: ObjectId("6537dfd8c2c68106a108b811"),
+  name: 'Raj',
+  age: 20,
+  salary: 500000
+}
+{
+  _id: ObjectId("6537dfd8c2c68106a108b813"),
+  name: 'Mahesh',
+  age: 20,
+  salary: 600000
+}
+{
+  _id: ObjectId("6537dfd8c2c68106a108b812"),
+  name: 'Pratik',
+  age: 19,
+  salary: 500000
+}
+
+db.employee.aggregate([{$group: {_id: null,totalSalary: {$sum: "$salary"}}}])
+{
+  _id: null,
+  totalSalary: 2300000
+}
+
+db.employee.aggregate([{$group: {_id: null,avgSalary: {$avg: "$salary"}}}])
+{
+  _id: null,
+  avgSalary: 575000
+}
+
+db.employee.deleteOne({name: "Pratik"})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+
+db.employee.find({age:{$gt: 19}})
+{
+  _id: ObjectId("6537df62c2c68106a108b810"),
+  name: 'Harshal',
+  age: 20,
+  salary: 700000
+}
+{
+  _id: ObjectId("6537dfd8c2c68106a108b811"),
+  name: 'Raj',
+  age: 20,
+  salary: 500000
+}
+{
+  _id: ObjectId("6537dfd8c2c68106a108b811"),
+  name: 'Raj',
+  age: 20,
+  salary: 500000
+}

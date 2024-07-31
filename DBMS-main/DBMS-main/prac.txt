@@ -1,0 +1,463 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database prac;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use prac;
+Database changed
+mysql> create table employee(fname VARCHAR(20),lname VARCHAR(20),salary INT,dept VARCHAR(20),birthdate DATE,gender VARCHAR(10),m_id INT);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO employee VALUES('Harshal','Tak',900000,'Tech','14-02-2003','Male',101);
+ERROR 1292 (22007): Incorrect date value: '14-02-2003' for column 'birthdate' at row 1
+mysql> INSERT INTO employee VALUES('Harshal','Tak',900000,'Tech','2003-02-14','Male',101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO employee VALUES('Sidd','Lohar',600000,'Tech','2003-04-15','Male',102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES('Myura','Rangdal',800000,'Marketing','2002-10-22','Female',101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO employee VALUES('Mayuri','Wabale',100000,'CEO','2000-5-22','Female',101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT *FROM Employee;
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
+| Mayuri  | Wabale  | 100000 | CEO       | 2000-05-22 | Female |  101 |
++---------+---------+--------+-----------+------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee ORDER BY lname DESC;
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Mayuri  | Wabale  | 100000 | CEO       | 2000-05-22 | Female |  101 |
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
++---------+---------+--------+-----------+------------+--------+------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT *FROM Employee ORDER BY dept ASC;
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Mayuri  | Wabale  | 100000 | CEO       | 2000-05-22 | Female |  101 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
++---------+---------+--------+-----------+------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee ORDER BY lname,dept DESC;
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Mayuri  | Wabale  | 100000 | CEO       | 2000-05-22 | Female |  101 |
++---------+---------+--------+-----------+------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee ORDER BY lname,dept ASC;
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Mayuri  | Wabale  | 100000 | CEO       | 2000-05-22 | Female |  101 |
++---------+---------+--------+-----------+------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee ORDER BY lname;
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Mayuri  | Wabale  | 100000 | CEO       | 2000-05-22 | Female |  101 |
++---------+---------+--------+-----------+------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee ORDER BY dept,lname;
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Mayuri  | Wabale  | 100000 | CEO       | 2000-05-22 | Female |  101 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
++---------+---------+--------+-----------+------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> UPDATE TABLE Emoplyee SET salary = 1000000 WHERE dept = 'CEO';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE Emoplyee SET salary = 1000000 WHERE dept = 'CEO'' at line 1
+mysql> UPDATE TABLE Empolyee SET salary = 1000000 WHERE dept = 'CEO';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE Empolyee SET salary = 1000000 WHERE dept = 'CEO'' at line 1
+mysql> UPDATE TABLE Employee SET salary = 1000000 WHERE dept = 'CEO';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE Employee SET salary = 1000000 WHERE dept = 'CEO'' at line 1
+mysql> UPDATE Employee SET salary = 1000000 WHERE dept = 'CEO';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT *FROM Employee ORDER BY dept,lname;
++---------+---------+---------+-----------+------------+--------+------+
+| fname   | lname   | salary  | dept      | birthdate  | gender | m_id |
++---------+---------+---------+-----------+------------+--------+------+
+| Mayuri  | Wabale  | 1000000 | CEO       | 2000-05-22 | Female |  101 |
+| Myura   | Rangdal |  800000 | Marketing | 2002-10-22 | Female |  101 |
+| Sidd    | Lohar   |  600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Harshal | Tak     |  900000 | Tech      | 2003-02-14 | Male   |  101 |
++---------+---------+---------+-----------+------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE salary >= 500000 AND salary <= 1000000;
++---------+---------+---------+-----------+------------+--------+------+
+| fname   | lname   | salary  | dept      | birthdate  | gender | m_id |
++---------+---------+---------+-----------+------------+--------+------+
+| Harshal | Tak     |  900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Sidd    | Lohar   |  600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Myura   | Rangdal |  800000 | Marketing | 2002-10-22 | Female |  101 |
+| Mayuri  | Wabale  | 1000000 | CEO       | 2000-05-22 | Female |  101 |
++---------+---------+---------+-----------+------------+--------+------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT *FROM Employee WHERE fname LIKE 'S%';
++-------+-------+--------+------+------------+--------+------+
+| fname | lname | salary | dept | birthdate  | gender | m_id |
++-------+-------+--------+------+------------+--------+------+
+| Sidd  | Lohar | 600000 | Tech | 2003-04-15 | Male   |  102 |
++-------+-------+--------+------+------------+--------+------+
+1 row in set (0.01 sec)
+
+mysql> SELECT *FROM Employee WHERE fname LIKE 's%';
++-------+-------+--------+------+------------+--------+------+
+| fname | lname | salary | dept | birthdate  | gender | m_id |
++-------+-------+--------+------+------------+--------+------+
+| Sidd  | Lohar | 600000 | Tech | 2003-04-15 | Male   |  102 |
++-------+-------+--------+------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE fname >= 's' AND fname < 'r';
+Empty set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE fname = 'S' AND fname < 'r';
+Empty set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE fname <= 'S';
++---------+---------+---------+-----------+------------+--------+------+
+| fname   | lname   | salary  | dept      | birthdate  | gender | m_id |
++---------+---------+---------+-----------+------------+--------+------+
+| Harshal | Tak     |  900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Myura   | Rangdal |  800000 | Marketing | 2002-10-22 | Female |  101 |
+| Mayuri  | Wabale  | 1000000 | CEO       | 2000-05-22 | Female |  101 |
++---------+---------+---------+-----------+------------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE fname >= 'S';
++-------+-------+--------+------+------------+--------+------+
+| fname | lname | salary | dept | birthdate  | gender | m_id |
++-------+-------+--------+------+------------+--------+------+
+| Sidd  | Lohar | 600000 | Tech | 2003-04-15 | Male   |  102 |
++-------+-------+--------+------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE birthdate BETWEEN '2003-02-10' AND '2002-10-30' GROUP BY gender;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'prac.Employee.fname' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT *FROM Employee WHERE birthdate BETWEEN '2003-02-10' AND '2002-10-30';
+Empty set (0.01 sec)
+
+mysql> SELECT *FROM Employee WHERE birthdate BETWEEN '2002-02-10' AND '2003-10-30';
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
++---------+---------+--------+-----------+------------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE birthdate BETWEEN '2002-02-10' AND '2003-10-30' GROUP BY gender;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'prac.Employee.fname' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT *FROM Employee WHERE birthdate BETWEEN '2002-02-10' AND '2003-10-30';
++---------+---------+--------+-----------+------------+--------+------+
+| fname   | lname   | salary | dept      | birthdate  | gender | m_id |
++---------+---------+--------+-----------+------------+--------+------+
+| Harshal | Tak     | 900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Sidd    | Lohar   | 600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Myura   | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
++---------+---------+--------+-----------+------------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE birthdate BETWEEN '2002-02-10' AND '2003-10-30' AND gender = 'Male';
++---------+-------+--------+------+------------+--------+------+
+| fname   | lname | salary | dept | birthdate  | gender | m_id |
++---------+-------+--------+------+------------+--------+------+
+| Harshal | Tak   | 900000 | Tech | 2003-02-14 | Male   |  101 |
+| Sidd    | Lohar | 600000 | Tech | 2003-04-15 | Male   |  102 |
++---------+-------+--------+------+------------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE birthdate BETWEEN '2002-02-10' AND '2003-10-30' AND GROUP BY gender;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY gender' at line 1
+mysql> SELECT *FROM Employee GROUP BY gebder;
+ERROR 1054 (42S22): Unknown column 'gebder' in 'group statement'
+mysql> SELECT *FROM Employee GROUP BY gender;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'prac.Employee.fname' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT COUNT(lname),fname FROM Employee GROUP BY gender;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'prac.Employee.fname' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT COUNT(lname),fname,gender FROM Employee GROUP BY gender;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'prac.Employee.fname' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT COUNT(lname) FROM Employee;
++--------------+
+| COUNT(lname) |
++--------------+
+|            4 |
++--------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT COUNT(lname),fname,gender FROM Employee GROUP BY gender;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'prac.Employee.fname' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT *FROM Employee GROUP BY gender;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'prac.Employee.fname' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT *FROM Employee GROUP BY m_id;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'prac.Employee.fname' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT COUNT(gender) FROM Employee GROUP BY gender;
++---------------+
+| COUNT(gender) |
++---------------+
+|             2 |
+|             2 |
++---------------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT COUNT(gender),gender FROM Employee GROUP BY gender;
++---------------+--------+
+| COUNT(gender) | gender |
++---------------+--------+
+|             2 | Male   |
+|             2 | Female |
++---------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Num,gender FROM Employee GROUP BY gender;
+ERROR 1054 (42S22): Unknown column 'Num' in 'field list'
+mysql> SELECT COUNT(gender) AS No_of_employees,gender FROM Employee GROUP BY gender;
++-----------------+--------+
+| No_of_employees | gender |
++-----------------+--------+
+|               2 | Male   |
+|               2 | Female |
++-----------------+--------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT salary FROM Employee;
++---------+
+| salary  |
++---------+
+|  900000 |
+|  600000 |
+|  800000 |
+| 1000000 |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE m_id = 101;
++---------+---------+---------+-----------+------------+--------+------+
+| fname   | lname   | salary  | dept      | birthdate  | gender | m_id |
++---------+---------+---------+-----------+------------+--------+------+
+| Harshal | Tak     |  900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Myura   | Rangdal |  800000 | Marketing | 2002-10-22 | Female |  101 |
+| Mayuri  | Wabale  | 1000000 | CEO       | 2000-05-22 | Female |  101 |
++---------+---------+---------+-----------+------------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee WHERE fname LIKE "____a";
++-------+---------+--------+-----------+------------+--------+------+
+| fname | lname   | salary | dept      | birthdate  | gender | m_id |
++-------+---------+--------+-----------+------------+--------+------+
+| Myura | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
++-------+---------+--------+-----------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM Employee LIMIT 1 OFFSET 3 ORDER BY salary DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY salary DESC' at line 1
+mysql> SELECT *FROM Employee OFFSET 3 ORDER BY salary DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '3 ORDER BY salary DESC' at line 1
+mysql> SELECT *FROM Employee ORDER BY salary DESC LIMIT 1 OFFSET 3;
++-------+-------+--------+------+------------+--------+------+
+| fname | lname | salary | dept | birthdate  | gender | m_id |
++-------+-------+--------+------+------------+--------+------+
+| Sidd  | Lohar | 600000 | Tech | 2003-04-15 | Male   |  102 |
++-------+-------+--------+------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM Employee;
++---------+---------+---------+-----------+------------+--------+------+
+| fname   | lname   | salary  | dept      | birthdate  | gender | m_id |
++---------+---------+---------+-----------+------------+--------+------+
+| Harshal | Tak     |  900000 | Tech      | 2003-02-14 | Male   |  101 |
+| Sidd    | Lohar   |  600000 | Tech      | 2003-04-15 | Male   |  102 |
+| Myura   | Rangdal |  800000 | Marketing | 2002-10-22 | Female |  101 |
+| Mayuri  | Wabale  | 1000000 | CEO       | 2000-05-22 | Female |  101 |
++---------+---------+---------+-----------+------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM Employee ORDER BY salary DESC LIMIT 1 OFFSET 2;
++-------+---------+--------+-----------+------------+--------+------+
+| fname | lname   | salary | dept      | birthdate  | gender | m_id |
++-------+---------+--------+-----------+------------+--------+------+
+| Myura | Rangdal | 800000 | Marketing | 2002-10-22 | Female |  101 |
++-------+---------+--------+-----------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM Employee ORDER BY salary DESC LIMIT 1 OFFSET 0;
++--------+--------+---------+------+------------+--------+------+
+| fname  | lname  | salary  | dept | birthdate  | gender | m_id |
++--------+--------+---------+------+------------+--------+------+
+| Mayuri | Wabale | 1000000 | CEO  | 2000-05-22 | Female |  101 |
++--------+--------+---------+------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM Employee OFFSET 0 AND OFFSET 3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0 AND OFFSET 3' at line 1
+mysql> SELECT *FROM Employee OFFSET 0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1
+mysql> SELECT *FROM Employee LIMIT 1 OFFSET 0;
++---------+-------+--------+------+------------+--------+------+
+| fname   | lname | salary | dept | birthdate  | gender | m_id |
++---------+-------+--------+------+------------+--------+------+
+| Harshal | Tak   | 900000 | Tech | 2003-02-14 | Male   |  101 |
++---------+-------+--------+------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> SELECT *FROM Employee LIMIT 1 OFFSET 0 AND OFFSET 2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND OFFSET 2' at line 1
+mysql> SELECT *FROM Employee LIMIT 1 OFFSET 0,OFFSET 2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',OFFSET 2' at line 1
+mysql> SELECT *FROM Employee LIMIT 1 OFFSET 0,OFFSET 3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',OFFSET 3' at line 1
+mysql> SELECT (SELECT *FROM Employee LIMIT 1) as 'first',(SELECT *FROM Employee LIMIT 1 OFFET 3) as 'last';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OFFET 3) as 'last'' at line 1
+mysql> SELECT (SELECT *FROM Employee LIMIT 1) as 'first',(SELECT *FROM Employee LIMIT 1 OFFSET 3) as 'last';
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> SELECT (SELECT fname FROM Employee LIMIT 1) as 'first',(SELECT fname FROM Employee LIMIT 1 OFFSET 3) as 'last';
++---------+--------+
+| first   | last   |
++---------+--------+
+| Harshal | Mayuri |
++---------+--------+
+1 row in set (0.00 sec)
+
+mysql> CREATE Table test1(id INT,fname VARCHAR(20));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE Table test2(id INT,lname VARCHAR(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE Table test3(id INT,dept VARCHAR(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO test1 VALUES(1,'Harshal');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO test1 VALUES(2,'Mayura');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO test1 VALUES(3,'Mayuri');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO test2 VALUES(1,'Tak');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO test2 VALUES(2,'Rangdal');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO test2 VALUES(3,'Wabale');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO test3 VALUES(1,'AI-DS');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO test3 VALUES(2,'AI-DS');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO test3 VALUES(3,'Maths');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT *FROM test1;
++------+---------+
+| id   | fname   |
++------+---------+
+|    1 | Harshal |
+|    2 | Mayura  |
+|    3 | Mayuri  |
++------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *FROM test2;
++------+---------+
+| id   | lname   |
++------+---------+
+|    1 | Tak     |
+|    2 | Rangdal |
+|    3 | Wabale  |
++------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *FROM test3;
++------+-------+
+| id   | dept  |
++------+-------+
+|    1 | AI-DS |
+|    2 | AI-DS |
+|    3 | Maths |
++------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT test1.id,test1.fname,test2.lname FROM test1 INNER JOIN test2 ON test1.id = test2.id;
++------+---------+---------+
+| id   | fname   | lname   |
++------+---------+---------+
+|    1 | Harshal | Tak     |
+|    2 | Mayura  | Rangdal |
+|    3 | Mayuri  | Wabale  |
++------+---------+---------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT test1.id,test1.fname,test2.lname,test3.dept FROM test1 INNER JOIN test2 ON test1.id = test2.id test2 INNER JOIN test3 IN test2.id = test3.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'test2 INNER JOIN test3 IN test2.id = test3.id' at line 1
+mysql> SELECT test1.id,test1.fname,test2.lname,test3.dept FROM test1 INNER JOIN test2 ON test1.id = test2.id test2 INNER JOIN test3 ON test2.id = test3.id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'test2 INNER JOIN test3 ON test2.id = test3.id' at line 1
+mysql> SELECT test1.id,test1.fname,test2.lname,test3.dept FROM test1 INNER JOIN test2 ON test1.id = test2.id INNER JOIN test3 ON test1.id = test3.id;
++------+---------+---------+-------+
+| id   | fname   | lname   | dept  |
++------+---------+---------+-------+
+|    1 | Harshal | Tak     | AI-DS |
+|    2 | Mayura  | Rangdal | AI-DS |
+|    3 | Mayuri  | Wabale  | Maths |
++------+---------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>

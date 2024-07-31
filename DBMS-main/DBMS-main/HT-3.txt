@@ -1,0 +1,82 @@
+mysql> USE assignment4;
+Database changed
+mysql> CREATE TABLE Borrower(
+    -> Roll_no INT(3),
+    -> Name VARCHAR(20),
+    -> Date_of_Issue DATE,
+    -> Name_of_Book VARCHAR(20),
+    -> Status CHAR(1));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> CREATE TABLE Fine(
+    -> Roll_no INT(3),
+    -> Today DATE,
+    -> Amt DECIMAL(4,2));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> INSERT INTO Borrower VALUES(101,"Harshal Tak",'2023-09-1','DBMS','I');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Borrower VALUES(102,"Raj Shinde",'2023-08-1','AI','I');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Borrower VALUES(103,"Mahesh Shriram",'2023-09-20','HCI','I');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE ReturnBook(IN PRoll_No INT)
+    -> BEGIN
+    ->  DECLARE fine_amt INT;
+    ->  DECLARE no_of_days INT;
+    ->  DECLARE issuedate DATE;
+    ->  SELECT Date_of_Issue
+    ->  INTO issuedate
+    ->  FROM Borrower
+    ->  WHERE
+    ->  Roll_no = PRoll_No;
+    ->
+    ->  SET no_of_days = DATEDIFF(CURRENT_DATE(),issuedate);
+    ->
+    ->  IF no_of_days < 15 THEN
+    ->    SET fine_amt = 0;
+    ->  ELSEIF no_of_days >= 15 AND no_of_days <= 30 THEN
+    ->    SET fine_amt = 5;
+    ->  ELSE
+    ->    SET fine_amt = 50;
+    ->  END IF;
+    ->
+    ->  INSERT INTO Fine(Roll_No,Today,Amt) VALUES (PRoll_No, CURRENT_DATE(), fine_amt);
+    ->  UPDATE Borrower SET status = 'R' WHERE Roll_no = PRoll_NO;
+    -> END $$
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DELIMITER ;
+mysql> SELECT *FROM Borrower;\
++---------+----------------+---------------+--------------+--------+
+| Roll_no | Name           | Date_of_Issue | Name_of_Book | Status |
++---------+----------------+---------------+--------------+--------+
+|     101 | Harshal Tak    | 2023-09-01    | DBMS         | R      |
+|     102 | Raj Shinde     | 2023-08-01    | AI           | R      |
+|     103 | Mahesh Shriram | 2023-09-20    | HCI          | R      |
++---------+----------------+---------------+--------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> CALL ReturnBook(101);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CALL ReturnBook(102);
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL ReturnBook(103);
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT *FROM Fine;
++---------+------------+-------+
+| Roll_no | Today      | Amt   |
++---------+------------+-------+
+|     101 | 2023-09-27 |  5.00 |
+|     102 | 2023-09-27 | 50.00 |
+|     103 | 2023-09-27 |  0.00 |
++---------+------------+-------+
+3 rows in set (0.00 sec)
+
