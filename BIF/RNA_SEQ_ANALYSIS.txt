@@ -1,0 +1,25 @@
+RNA-Seq Differential Expression Analysis Report
+
+==================================================
+Summary of Analysis:
+
+The analysis was conducted to identify differentially expressed genes between two conditions using RNA-Seq data.
+
+==================================================
+Differentially Expressed Genes:
+
+Gene          Mean Sample1    Mean Sample2         Adj. P-Value
+============================================================
+Gene1                97.30           76.40               0.0005
+Gene2               102.20           84.60               0.0004
+Gene3               103.30           79.70               0.0003
+Gene4               102.20           80.20               0.0004
+==================================================
+Functional Annotations:
+
+Gene       GO Annotations                
+========================================
+Gene1      GO:0001234,GO:5678901         
+Gene2      GO:2345678,GO:8901234         
+Gene3      GO:1234567                    
+Gene4      GO:5678901,GO:2345678         
